@@ -10,13 +10,18 @@ app.all('/', (req, res) => {
     res.send('Yo!')
 })
 
+
+// endpoint to retrieve data from database and return it in JSON format
 app.get('/data', (req, res) => {
-    const sql = 'SELECT * FROM yourtable';
-    connectDB.connection.query(sql, (err, result) => {
-      if (err) throw err;
-      res.json(result);
+  const sql = 'SELECT user_id, name, age, phone FROM yourtable';
+  connection.query(sql, (err, result) => {
+    if (err) throw err;
+    res.json({
+      status_code: 200,
+      data: result
     });
   });
+});;
 
   
 app.listen(PORT, () => {
